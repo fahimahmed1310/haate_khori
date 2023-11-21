@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haate_khori_app/screens/course_player_screen.dart';
+import 'package:haate_khori_app/screens/test.dart';
 
 class CourseDisplayUi extends StatefulWidget {
 
@@ -68,9 +69,10 @@ class _CourseDisplayUiState extends State<CourseDisplayUi> {
                   backgroundColor: Colors.white
               ),
               onPressed:(){
-                // Navigator.push(context, MaterialPageRoute(builder: (context){
-                //   return CoursePlayerScreen();
-                // }));
+
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return VideoApp();
+                }));
               },
               child: const Text(
                 "Continue Course",

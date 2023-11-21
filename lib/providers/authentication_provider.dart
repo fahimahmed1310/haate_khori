@@ -9,6 +9,8 @@ class AuthenticationProvider with ChangeNotifier{
 
 
 
+
+
 // Getter and Setter
 
 
@@ -25,13 +27,7 @@ class AuthenticationProvider with ChangeNotifier{
 
 
 
-
-
-
-
-
-
-  // Methods
+// Methods
 
 
 

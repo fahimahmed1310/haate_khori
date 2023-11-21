@@ -7,12 +7,17 @@ class DashBoardProvider with ChangeNotifier{
 
   final MyCoursesInfoList _myCoursesInfoList = MyCoursesInfoList();
 
-
+  int? _videoNumber = 0;
 
   //Getter and Setter
 
   MyCoursesInfoList get myCoursesInfoList => _myCoursesInfoList;
 
 
+  int get videoNumber => _videoNumber!;
+  set videoNumber(int value) {
+    _videoNumber = value;
+    notifyListeners();
+  }
 
 }

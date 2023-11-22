@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haate_khori_app/constants/app_constants.dart';
+import 'package:haate_khori_app/utils/constants/app_constants.dart';
 
 class AppTitleUi extends StatelessWidget {
   const AppTitleUi({

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:haate_khori_app/providers/dashboard_provider.dart';
-import 'package:haate_khori_app/reusablewidgets/app_title_ui.dart';
-import 'package:haate_khori_app/reusablewidgets/dashboard_pages_widgets/course_display_ui.dart';
 import 'package:haate_khori_app/screens/drawer_screen.dart';
+import 'package:haate_khori_app/utils/reusablewidgets/app_title_ui.dart';
+import 'package:haate_khori_app/utils/reusablewidgets/dashboard_pages_widgets/course_display_ui.dart';
 import 'package:provider/provider.dart';
 
-class DashBoardPage extends StatefulWidget {
-  const DashBoardPage({super.key});
+class DashBoardScreen extends StatefulWidget {
+  const DashBoardScreen({super.key});
 
   @override
-  State<DashBoardPage> createState() => _DashBoardPageState();
+  State<DashBoardScreen> createState() => _DashBoardScreenState();
 }
 
-class _DashBoardPageState extends State<DashBoardPage> {
+class _DashBoardScreenState extends State<DashBoardScreen> {
 
 
 

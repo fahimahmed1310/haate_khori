@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:haate_khori_app/constants/app_constants.dart';
 import 'package:haate_khori_app/providers/authentication_provider.dart';
 import 'package:haate_khori_app/providers/dashboard_provider.dart';
 import 'package:haate_khori_app/screens/splash_screen.dart';
-import 'package:haate_khori_app/screens/test.dart';
-import 'package:haate_khori_app/screens/test2.dart';
+import 'package:haate_khori_app/utils/constants/app_constants.dart';
+
 
 
 import 'package:provider/provider.dart';
@@ -35,7 +34,7 @@ class HaateKhori extends StatelessWidget {
         ),
       ),
       title: AppConstants.appTitle,
-      home:  SampleVideo(),
+      home:  const SplashScreen(),
     );
   }
 }

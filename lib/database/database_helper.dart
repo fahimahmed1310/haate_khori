@@ -8,7 +8,7 @@ class DatabaseHelper{
 
   Future<Database> initDatabase() async{
     Directory directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, 'haate_khori_table7.db');
+    final path = join(directory.path, 'haate_khori_table12.db');
     return openDatabase(
       path,
       version: 1,
@@ -23,11 +23,9 @@ class DatabaseHelper{
         );
 
         await db.execute(
-            "CREATE TABLE "+ DatabaseConstants.COURSE_VIDEO_INFO_TABLE+ " ( courseVideoId INTEGER PRIMARY KEY AUTOINCREMENT, courseVideoLocation TEXT NOT NULL, courseVideoName TEXT NOT NULL, courseVideoThumbnail TEXT NOT NULL, courseVideoFinished TEXT NOT NULL, UNIQUE (courseVideoLocation, courseVideoName, courseVideoThumbnail) ON CONFLICT REPLACE )"
+            "CREATE TABLE "+ DatabaseConstants.COURSE_VIDEO_INFO_TABLE+ " ( courseVideoId INTEGER PRIMARY KEY AUTOINCREMENT, courseVideoLocation TEXT NOT NULL, courseVideoName TEXT NOT NULL, courseVideoThumbnail TEXT NOT NULL, UNIQUE (courseVideoLocation, courseVideoName, courseVideoThumbnail) ON CONFLICT REPLACE )"
                 " "
         );
-
-
 
         },
     );

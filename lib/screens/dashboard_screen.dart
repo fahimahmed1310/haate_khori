@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haate_khori_app/providers/course_video_provider.dart';
 import 'package:haate_khori_app/providers/dashboard_provider.dart';
 import 'package:haate_khori_app/screens/drawer_screen.dart';
 import 'package:haate_khori_app/utils/reusablewidgets/app_title_ui.dart';
@@ -17,7 +18,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
  @override
   void didChangeDependencies() async{
     super.didChangeDependencies();
-    DashBoardProvider dashBoardProvider = Provider.of<DashBoardProvider>(context,listen:false);
+    DashBoardProvider dashBoardProvider = await Provider.of<DashBoardProvider>(context,listen:false);
     await dashBoardProvider.insertCourses();
     await dashBoardProvider.fetchCourses();
   }

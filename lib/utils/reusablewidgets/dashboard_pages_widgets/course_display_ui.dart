@@ -86,6 +86,9 @@ class _CourseDisplayUiState extends State<CourseDisplayUi> {
                         dashBoardProvider.selectedMyCourseId = widget.courseId!;
                         dashBoardProvider.selectedMyCourseId -- ;
                         courseVideoProvider.fetchedCourseVideoInfo = [];
+                        courseVideoProvider.isVideoOpened = false;
+                        courseVideoProvider.courseName = widget.courseName!;
+                        courseVideoProvider.selectedVideoIndex = 0;
                         await courseVideoProvider.insertCourseVideos();
                         await courseVideoProvider.fetchCourseVideos();
                         await Navigator.push(context, MaterialPageRoute(builder: (context)=> CoursePlayerScreen()));

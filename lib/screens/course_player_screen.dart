@@ -1,9 +1,12 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:haate_khori_app/models/bookmark.dart';
 import 'package:haate_khori_app/providers/course_video_provider.dart';
 import 'package:haate_khori_app/providers/dashboard_provider.dart';
-import 'package:haate_khori_app/utils/constants/app_constants.dart';
+import 'package:haate_khori_app/screens/bookmark_screen.dart';
+import 'package:haate_khori_app/utils/reusablewidgets/course_player_screen_widgets/course_video_list_ui.dart';
+import 'package:haate_khori_app/utils/reusablewidgets/time_format.dart';
 import 'package:provider/provider.dart';
 
 class CoursePlayerScreen extends StatefulWidget {
@@ -17,7 +20,6 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
 
   late VideoPlayerController videoPlayerController;
   late CustomVideoPlayerController customVideoPlayerController;
-  bool isVideoOpened = false;
 
 
 
@@ -32,12 +34,15 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
     customVideoPlayerController = CustomVideoPlayerController(context: context, videoPlayerController: videoPlayerController);
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
     super.dispose();
     videoPlayerController.dispose();
-    customVideoPlayerController.dispose();
   }
 
 
@@ -90,7 +95,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                       children: [
                         AspectRatio(
                           aspectRatio: 16 / 9,
-                          child: isVideoOpened == true
+                          child: courseVideoProvider.isVideoOpened == true
                               ? CustomVideoPlayer(
                               customVideoPlayerController:
                               customVideoPlayerController)
@@ -109,6 +114,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02,
                         ),
+                        courseVideoProvider.isVideoOpened == true ?
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -122,10 +128,10 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width * 0.02,
                                   ),
-                                  const Expanded(
+                                   Expanded(
                                     child: Text(
-                                      "Flutter: Thief Widget",
-                                      style: TextStyle(
+                                      "${courseVideoProvider.fetchedCourseVideoInfo[courseVideoProvider.selectedVideoIndex].courseVideoName}",
+                                      style: const TextStyle(
                                           fontFamily: "Acme",
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -136,7 +142,14 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {
+                              onTap: ()async {
+                                String time = await TimeFormat.formattedTime(timeInSecond:videoPlayerController.value.position.inSeconds);
+                                Bookmark bookmark = Bookmark(
+                                  courseName: dashBoardProvider.fetchedCoursesList[dashBoardProvider.selectedMyCourseId].courseName,
+                                  videoName: courseVideoProvider.fetchedCourseVideoInfo[courseVideoProvider.selectedVideoIndex].courseVideoName,
+                                  bookmarkedTime: time
+                                );
+                                courseVideoProvider.bookmarkVideoList.add(bookmark);
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
                                   content: Center(
@@ -152,6 +165,8 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                                   duration: Duration(seconds: 2),
                                   backgroundColor: Colors.green,
                                 ));
+                                videoPlayerController.pause();
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> BookmarkScreen()));
                               },
                               child: const Icon(
                                 Icons.bookmark,
@@ -159,7 +174,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                               ),
                             ),
                           ],
-                        ),
+                        ): Container(),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.05,
                         ),
@@ -199,65 +214,22 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02,
                         ),
-                        SingleChildScrollView(
-                          child: SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.37,
-                            child: ListView.separated(
-                              itemCount:  courseVideoProvider.fetchedCourseVideoInfo.length,
-                              separatorBuilder: (context, index) {
-                                return const Divider();
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount:  courseVideoProvider.fetchedCourseVideoInfo.length,
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: ()async{
+                                courseVideoProvider.selectedVideoIndex = index;
+                                await _onTap(index,courseVideoProvider);
                               },
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: ()async{
-                                    await _onTap(index,courseVideoProvider);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(
-                                        MediaQuery.of(context).size.height * 0.01),
-                                    decoration: const BoxDecoration(
-                                        color: AppConstants.secondaryColor),
-                                    child:  Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "${courseVideoProvider.fetchedCourseVideoInfo[index].courseVideoId}.",
-                                              style: const TextStyle(
-                                                  fontFamily: "Acme",
-                                                  fontSize: 20,
-                                                  color: Colors.white),
-                                            ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context).size.width * 0.04 ,
-                                            ),
-                                            Text(
-                                              "${courseVideoProvider.fetchedCourseVideoInfo[index].courseVideoName}",
-                                              style: const TextStyle(
-                                                  fontFamily: "Acme",
-                                                  fontSize: 20,
-                                                  color: Colors.white),
-                                            ),
-                                            SizedBox(
-                                              width: MediaQuery.of(context).size.width * 0.02 ,
-                                            ),
-                                            const Icon(
-                                              FontAwesomeIcons.circlePlay,
-                                              color: Colors.white,
-                                            ),
-                                          ],
-                                        ),
-                                        const Icon(FontAwesomeIcons.circleCheck,
-                                            color: Colors.green)
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                                child: CourseVideoListUi(selectedIndex: index,)
+                            );
+                          },
                         )
                       ],
                     ),
@@ -275,18 +247,18 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
   }
 
   _onTap(int index, CourseVideoProvider courseVideoProvider) {
-    videoPlayerController.dispose();
-    customVideoPlayerController.dispose();
+    //videoPlayerController.dispose();
+    //customVideoPlayerController.dispose();
     videoPlayerController =  VideoPlayerController.asset("${courseVideoProvider.fetchedCourseVideoInfo[index].courseVideoLocation}")
       ..initialize().then((_){
         videoPlayerController.play();
-
+        courseVideoProvider.isVideoOpened = true;
         videoPlayerController.addListener(() {
           setState(() {
-            isVideoOpened = true;
             if (!videoPlayerController.value.isPlaying && videoPlayerController.value.isInitialized &&
                 (videoPlayerController.value.duration ==videoPlayerController.value.position)) {
               videoPlayerController.pause();
+               //courseVideoProvider.insertCourseVideoFinished();
             }
           });
         });
@@ -347,3 +319,5 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
 
 
 }
+
+

@@ -8,31 +8,26 @@ class CourseVideosList{
       courseVideoLocation: "assets/videos/video1.mp4",
       courseVideoName: "RefreshIndicator Widget",
       courseVideoThumbnail: "assets/images/course_video_thumbnail/refresh_indicator.jpg",
-      courseVideoFinished: "false"
     ),
     CourseVideosInfo(
         courseVideoLocation: "assets/videos/video2.mp4",
         courseVideoName: "Physical Model Widget",
         courseVideoThumbnail: "assets/images/course_video_thumbnail/physical_model.jpg",
-        courseVideoFinished: "false"
     ),
     CourseVideosInfo(
         courseVideoLocation: "assets/videos/video3.mp4",
         courseVideoName: "Sensors_Plus Package",
         courseVideoThumbnail: "assets/images/course_video_thumbnail/sensors_plus.jpg",
-        courseVideoFinished: "false"
     ),
     CourseVideosInfo(
         courseVideoLocation: "assets/videos/video4.mp4",
         courseVideoName: "Freezed Package",
         courseVideoThumbnail: "assets/images/course_video_thumbnail/freezed.png",
-        courseVideoFinished: "false"
     ),
     CourseVideosInfo(
         courseVideoLocation: "assets/videos/video5.mp4",
         courseVideoName: "Path_Provider Package",
         courseVideoThumbnail: "assets/images/course_video_thumbnail/path_provider.jpg",
-        courseVideoFinished: "false"
     ),
   ];
 

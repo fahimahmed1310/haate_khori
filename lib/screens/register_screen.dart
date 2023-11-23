@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   passwordController: authProvider.passwordTextController,
                                   confirmPasswordController: authProvider.confirmPasswordTextController,
                                   isPasswordFieldActivate : false,
-                                  formFieldName: "Password",
+                                  formFieldName: "Confirm Password",
                                   validText: "Enter a valid password",
                                   validPasswordText: "The length of the password should be 8 or more",
                                   validConfirmPasswordText: "Confirm password is not matching",

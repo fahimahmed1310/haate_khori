@@ -9,7 +9,7 @@ class CourseVideoQueries{
 
   Future<int> insertCourseVideos(CourseVideosInfo courseVideosInfo) async{
     final db = await DatabaseHelper().initDatabase();
-    int value = await db.insert(DatabaseConstants.COURSE_VIDEO_INFO_TABLE, courseVideosInfo.toMap());
+    int value = await db.insert(DatabaseConstants.COURSE_VIDEO_INFO_TABLE,courseVideosInfo.toMap());
     return value;
   }
 
@@ -36,7 +36,6 @@ class CourseVideoQueries{
         courseVideoLocation: mVideos[index]["courseVideoLocation"],
         courseVideoName: mVideos[index]["courseVideoName"],
         courseVideoThumbnail: mVideos[index]["courseVideoThumbnail"],
-        courseVideoFinished: mVideos[index]["courseVideoFinished"],
       );
     });
     debugPrint("Fetch Course Query Print 2 " + coursesVideoInfo.length.toString());

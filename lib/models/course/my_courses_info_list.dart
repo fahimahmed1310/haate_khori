@@ -11,7 +11,6 @@ class MyCoursesInfoList{
     ),
 
     CoursesInfo(
-
         courseName: "The Ultimate Dart & Flutter",
         courseTeacherName: "Rivaan Ranawat",
         courseImage: "assets/images/my_course_images/my_course_2.jpg"

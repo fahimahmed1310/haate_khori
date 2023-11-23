@@ -1,7 +1,7 @@
 import 'package:haate_khori_app/database/database_helper.dart';
 import 'package:haate_khori_app/models/user.dart';
 import 'package:haate_khori_app/utils/constants/database_constants.dart';
-import 'package:sqflite/sqflite.dart';
+
 
 class UserTableQueries{
 

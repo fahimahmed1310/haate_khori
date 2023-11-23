@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:haate_khori_app/screens/dashboard_screen.dart';
 import 'package:haate_khori_app/screens/login_screen.dart';
 import 'package:haate_khori_app/utils/constants/app_constants.dart';
 import 'package:haate_khori_app/utils/reusablewidgets/app_title_ui.dart';

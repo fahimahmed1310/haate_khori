@@ -1,9 +1,9 @@
 import 'dart:ui';
-
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:haate_khori_app/screens/dashboard_screen.dart';
+
 
 class SampleVideo extends StatefulWidget {
   const SampleVideo({super.key});
@@ -116,7 +116,7 @@ class _SampleVideoState extends State<SampleVideo> {
                 (videoPlayerController.value.duration ==videoPlayerController.value.position)) {
               videoPlayerController.dispose();
               customVideoPlayerController.dispose();//checking the duration and position every time
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoardScreen()));
+              //Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoardScreen()));
             }
           });
         });
@@ -152,7 +152,7 @@ class _SampleVideoState extends State<SampleVideo> {
                 (videoPlayerController.value.duration ==videoPlayerController.value.position)) {
               videoPlayerController.dispose();
               customVideoPlayerController.dispose();//checking the duration and position every time
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoardScreen()));
+              //Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoardScreen()));
             }
           });
         });

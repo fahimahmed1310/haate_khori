@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                          duration: Duration(seconds: 3),
                          backgroundColor: Colors.green,
                        ));
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoardScreen()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoardScreen()));
                      }else{
                        ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                          content: Text("Incorrect email or password.", style: TextStyle(

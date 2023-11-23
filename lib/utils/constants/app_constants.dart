@@ -18,5 +18,6 @@ class AppConstants{
 
   //Colors
   static const Color backgroundColor = Color(0xFF394d5d);
+  static const Color secondaryColor = Colors.white24;
 
 }

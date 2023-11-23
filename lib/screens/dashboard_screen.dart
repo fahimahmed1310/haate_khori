@@ -14,17 +14,24 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
 
-
+ @override
+  void didChangeDependencies() async{
+    super.didChangeDependencies();
+    DashBoardProvider dashBoardProvider = Provider.of<DashBoardProvider>(context,listen:false);
+    await dashBoardProvider.insertCourses();
+    await dashBoardProvider.fetchCourses();
+  }
 
 
   @override
   Widget build(BuildContext context) {
     return  Consumer<DashBoardProvider>(
       builder: (_,dashBoardProvider,___){
-        return Scaffold(
+        return dashBoardProvider.fetchedCoursesList.isEmpty ? CircularProgressIndicator()
+        :Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
-            toolbarHeight:MediaQuery.of(context).size.height * 0.08,
+            toolbarHeight: MediaQuery.of(context).size.height * 0.08,
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: const AppTitleUi(),
@@ -61,7 +68,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     child: ListView.separated(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: dashBoardProvider.myCoursesInfoList.getCoursesInfoList().length,
+                      itemCount: dashBoardProvider.fetchedCoursesList.length,
                       separatorBuilder: (context,index){
                         return SizedBox(
                           width: MediaQuery.of(context).size.width * 0.03,
@@ -69,9 +76,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       },
                       itemBuilder: (context, index) {
                         return CourseDisplayUi(
-                          courseImageLocation: dashBoardProvider.myCoursesInfoList.getCoursesInfoList()[index].courseImage,
-                          courseName: dashBoardProvider.myCoursesInfoList.getCoursesInfoList()[index].courseName,
-                          courseTeacher: dashBoardProvider.myCoursesInfoList.getCoursesInfoList()[index].courseTeacherName,
+                          courseId: dashBoardProvider.fetchedCoursesList[index].courseId,
+                          courseImageLocation: dashBoardProvider.fetchedCoursesList[index].courseImage,
+                          courseName: dashBoardProvider.fetchedCoursesList[index].courseName,
+                          courseTeacher: dashBoardProvider.fetchedCoursesList[index].courseTeacherName,
                         );
                       },
                     ),

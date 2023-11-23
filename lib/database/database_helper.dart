@@ -7,17 +7,27 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseHelper{
 
   Future<Database> initDatabase() async{
-
     Directory directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, 'haate_khori.db');
+    final path = join(directory.path, 'haate_khori_table7.db');
     return openDatabase(
       path,
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
-           "CREATE TABLE ${DatabaseConstants.USER_TABLE} ( userId INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, password TEXT NOT NULL )"
+           "CREATE TABLE " +DatabaseConstants.USER_TABLE + "( userId INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, password TEXT NOT NULL )"
                " "
          );
+        await db.execute(
+            "CREATE TABLE "+ DatabaseConstants.COURSE_TABLE + " ( courseId INTEGER PRIMARY KEY AUTOINCREMENT, courseName TEXT NOT NULL, courseTeacherName TEXT NOT NULL, courseImage TEXT NOT NULL, UNIQUE (courseName, courseImage) ON CONFLICT REPLACE)"
+                " "
+        );
+
+        await db.execute(
+            "CREATE TABLE "+ DatabaseConstants.COURSE_VIDEO_INFO_TABLE+ " ( courseVideoId INTEGER PRIMARY KEY AUTOINCREMENT, courseVideoLocation TEXT NOT NULL, courseVideoName TEXT NOT NULL, courseVideoThumbnail TEXT NOT NULL, courseVideoFinished TEXT NOT NULL, UNIQUE (courseVideoLocation, courseVideoName, courseVideoThumbnail) ON CONFLICT REPLACE )"
+                " "
+        );
+
+
 
         },
     );

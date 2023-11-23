@@ -20,6 +20,7 @@ dependencies:
   sqflite: ^2.3.0
   path_provider: ^2.1.1
   email_validator: ^2.1.17
+  font_awesome_flutter: ^10.6.0
 
 
 dev_dependencies:
@@ -43,6 +44,7 @@ flutter:
   assets:
      - assets/images/
      - assets/images/my_course_images/
+     - assets/images/course_video_thumbnail/
      - assets/videos/
 
 

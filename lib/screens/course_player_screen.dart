@@ -30,7 +30,14 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
         "assets/videos/thief0.mp4"
     );
     customVideoPlayerController = CustomVideoPlayerController(context: context, videoPlayerController: videoPlayerController);
+  }
 
+
+  @override
+  void dispose() {
+    super.dispose();
+    videoPlayerController.dispose();
+    customVideoPlayerController.dispose();
   }
 
 

@@ -2,6 +2,7 @@ import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:haate_khori_app/models/bookmark.dart';
+import 'package:haate_khori_app/models/course_videos_complete.dart';
 import 'package:haate_khori_app/providers/course_video_provider.dart';
 import 'package:haate_khori_app/providers/dashboard_provider.dart';
 import 'package:haate_khori_app/screens/bookmark_screen.dart';
@@ -128,7 +129,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width * 0.02,
                                   ),
-                                   Expanded(
+                                  Expanded(
                                     child: Text(
                                       "${courseVideoProvider.fetchedCourseVideoInfo[courseVideoProvider.selectedVideoIndex].courseVideoName}",
                                       style: const TextStyle(
@@ -145,9 +146,9 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                               onTap: ()async {
                                 String time = await TimeFormat.formattedTime(timeInSecond:videoPlayerController.value.position.inSeconds);
                                 Bookmark bookmark = Bookmark(
-                                  courseName: dashBoardProvider.fetchedCoursesList[dashBoardProvider.selectedMyCourseId].courseName,
-                                  videoName: courseVideoProvider.fetchedCourseVideoInfo[courseVideoProvider.selectedVideoIndex].courseVideoName,
-                                  bookmarkedTime: time
+                                    courseName: dashBoardProvider.fetchedCoursesList[dashBoardProvider.selectedMyCourseId].courseName,
+                                    videoName: courseVideoProvider.fetchedCourseVideoInfo[courseVideoProvider.selectedVideoIndex].courseVideoName,
+                                    bookmarkedTime: time
                                 );
                                 courseVideoProvider.bookmarkVideoList.add(bookmark);
                                 ScaffoldMessenger.of(context)
@@ -155,6 +156,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                                   content: Center(
                                     child: Text(
                                       "Bookmark Saved",
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Acme",
@@ -191,22 +193,30 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                             ),
                             Row(
                               children: [
-                                const Icon(
-                                  FontAwesomeIcons.circlePlay,
-                                  color: Colors.red,
-                                  size: 20,
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      FontAwesomeIcons.circlePlay,
+                                      color: Colors.red,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width * 0.02,
+                                    ),
+                                    Text(
+                                      courseVideoProvider.fetchedCourseVideoInfo.length.toString(),
+                                      style: const TextStyle(
+                                          fontFamily: "Acme",
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.02,
+                                  width: MediaQuery.of(context).size.height * 0.02,
                                 ),
-                                Text(
-                                  courseVideoProvider.fetchedCourseVideoInfo.length.toString(),
-                                  style: const TextStyle(
-                                      fontFamily: "Acme",
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
+                                Icon(FontAwesomeIcons.certificate, color: Colors.grey),
                               ],
                             ),
                           ],
@@ -230,7 +240,8 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
                                 child: CourseVideoListUi(selectedIndex: index,)
                             );
                           },
-                        )
+                        ),
+
                       ],
                     ),
                   ),
@@ -258,13 +269,22 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
             if (!videoPlayerController.value.isPlaying && videoPlayerController.value.isInitialized &&
                 (videoPlayerController.value.duration ==videoPlayerController.value.position)) {
               videoPlayerController.pause();
-               //courseVideoProvider.insertCourseVideoFinished();
+              CourseVideosComplete courseVideosComplete = CourseVideosComplete(
+                courseVideoId:  courseVideoProvider.fetchedCourseVideoInfo[index].courseVideoId,
+                courseName: courseVideoProvider.courseName,
+                courseVideoName: courseVideoProvider.fetchedCourseVideoInfo[index].courseVideoName,
+              );
+              if (courseVideoProvider.courseVideosComplete.contains(courseVideosComplete) != true) {
+                courseVideoProvider.courseVideosComplete.add(courseVideosComplete);
+              }
             }
+
           });
         });
       });
     customVideoPlayerController = CustomVideoPlayerController(
       customVideoPlayerSettings: const CustomVideoPlayerSettings(
+
         settingsButtonAvailable: false,
         durationPlayedTextStyle: TextStyle(
             fontSize: 14,
@@ -274,6 +294,7 @@ class _CoursePlayerScreenState extends State<CoursePlayerScreen> {
           allowScrubbing: true,
         ),
       ),
+
       context: context,
       videoPlayerController: videoPlayerController,
     );

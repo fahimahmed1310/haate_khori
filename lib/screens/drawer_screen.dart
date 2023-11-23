@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class DrawerScreen extends StatefulWidget {
@@ -67,6 +68,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   color: Colors.white,
                 ),
                 title: const Text('Bookmarks'),
+                titleTextStyle: const TextStyle(
+                    color: Colors.white, fontSize: 20, fontFamily: "Acme"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  FontAwesomeIcons.certificate,
+                  color: Colors.white,
+                ),
+                title: const Text('Certificates'),
                 titleTextStyle: const TextStyle(
                     color: Colors.white, fontSize: 20, fontFamily: "Acme"),
                 onTap: () {

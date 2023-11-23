@@ -34,7 +34,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
     return  Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white,fontFamily: "Acme"),
         controller: widget.isPasswordFieldActivate == true? widget.passwordController
             : widget.confirmPasswordController,
         decoration: InputDecoration(

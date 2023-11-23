@@ -8,7 +8,7 @@ class DatabaseHelper{
 
   Future<Database> initDatabase() async{
     Directory directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, 'haate_khori_table12.db');
+    final path = join(directory.path, 'haate_khori_app.db');
     return openDatabase(
       path,
       version: 1,

@@ -59,11 +59,9 @@ class _CourseVideoListUiState extends State<CourseVideoListUi> {
                   ),
                 ],
               ),
-               Icon(FontAwesomeIcons.circleCheck,
-                  color:Colors.green,
-                  //courseVideoProvider.fetchedCourseVideoFinished.contains(courseVideoProvider.fetchedCourseVideoInfo[widget.selectedIndex!].courseVideoName) ? Colors.green : Colors.grey
-
-              )
+              Icon(FontAwesomeIcons.circleCheck,
+                  color: Colors.green,
+              ),
             ],
           ),
         );

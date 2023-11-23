@@ -82,7 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
                          await authProvider.isUserExistWhenLogin(user);
                          if(authProvider.isUserExist == true){
                            ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
-                             content: Text("Login Successful", style: TextStyle(
+                             content: Text("Login Successful",
+                               textAlign: TextAlign.center,style: TextStyle(
                                  fontWeight: FontWeight.bold,
                                  fontFamily: "Acme"
                              ),),
@@ -93,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                            Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoardScreen()));
                          }else{
                            ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
-                             content: Text("Incorrect email or password.", style: TextStyle(
+                             content: Text("Incorrect email or password.",  textAlign: TextAlign.center,
+                               style: TextStyle(
                                  fontWeight: FontWeight.bold,
                                  fontFamily: "Acme"
                              ),),

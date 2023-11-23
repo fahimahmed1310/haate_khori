@@ -89,6 +89,7 @@ class _CourseDisplayUiState extends State<CourseDisplayUi> {
                         courseVideoProvider.isVideoOpened = false;
                         courseVideoProvider.courseName = widget.courseName!;
                         courseVideoProvider.selectedVideoIndex = 0;
+                        courseVideoProvider.courseVideosComplete = [];
                         await courseVideoProvider.insertCourseVideos();
                         await courseVideoProvider.fetchCourseVideos();
                         await Navigator.push(context, MaterialPageRoute(builder: (context)=> CoursePlayerScreen()));

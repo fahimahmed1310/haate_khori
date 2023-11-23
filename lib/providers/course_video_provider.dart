@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:haate_khori_app/models/bookmark.dart';
 import 'package:haate_khori_app/models/course_player/course_videos_info.dart';
 import 'package:haate_khori_app/models/course_player/course_videos_list.dart';
+import 'package:haate_khori_app/models/course_videos_complete.dart';
 import 'package:haate_khori_app/repositories/course_video_repository.dart';
 
 class CourseVideoProvider with ChangeNotifier{
 
   List<CourseVideosInfo> _fetchedCourseVideoInfo = [];
   List<Bookmark> _bookmarkVideoList = [];
+  List<CourseVideosComplete> _courseVideosComplete = [];
   final CourseVideosList _courseVideosList = CourseVideosList();
   String? _courseName;
   String? _userEmail;
@@ -34,6 +36,14 @@ class CourseVideoProvider with ChangeNotifier{
     _bookmarkVideoList = value;
     notifyListeners();
   }
+
+
+  List<CourseVideosComplete> get courseVideosComplete => _courseVideosComplete;
+  set courseVideosComplete(List<CourseVideosComplete> value) {
+    _courseVideosComplete = value;
+    notifyListeners();
+  }
+
 
 
   get isInsertAllVideos => _isInsertAllVideos;

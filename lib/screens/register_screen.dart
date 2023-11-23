@@ -7,7 +7,7 @@ import 'package:haate_khori_app/utils/reusablewidgets/authentication_pages_widge
 import 'package:haate_khori_app/utils/reusablewidgets/authentication_pages_widgets/auth_action_button_ui.dart';
 import 'package:haate_khori_app/utils/reusablewidgets/authentication_pages_widgets/email_form_field.dart';
 import 'package:haate_khori_app/utils/reusablewidgets/authentication_pages_widgets/password_form_field.dart';
-import 'package:haate_khori_app/utils/reusablewidgets/custom_snackbar.dart';
+
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -93,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Center(
-                                  child: Text("User is exist", style: TextStyle(
+                                  child: Text("User is exist",  textAlign: TextAlign.center,style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "Acme",
                                       fontSize: 15
@@ -122,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                           }else{
                             ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
-                              content: Text("Registration Is Not Complete", style: TextStyle(
+                              content: Text("Registration Is Not Complete",  textAlign: TextAlign.center,style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Acme"
                               ),),
@@ -133,7 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                       }else{
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Registration Is Not Complete", style: TextStyle(
+                          content: Text("Registration Is Not Complete", textAlign: TextAlign.center, style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: "Acme"
                           ),),

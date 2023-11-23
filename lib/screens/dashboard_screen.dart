@@ -28,7 +28,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return  Consumer<DashBoardProvider>(
       builder: (_,dashBoardProvider,___){
-        return dashBoardProvider.fetchedCoursesList.isEmpty ? CircularProgressIndicator()
+        return dashBoardProvider.fetchedCoursesList.isEmpty ? Center(child: CircularProgressIndicator())
         :Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
